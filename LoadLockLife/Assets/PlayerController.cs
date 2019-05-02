@@ -5,6 +5,8 @@ using TMPro;
 public class PlayerController : MonoBehaviour {
 
 
+    public int tutorialChapter;
+
     Rigidbody rb;
     public float speed;
     public float maxSpeed = 4.5f;
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour {
         audioSource = Camera.main.GetComponent<AudioSource>();
         highscore = PlayerPrefs.GetInt("highscore");
         Time.timeScale = 1f;
+        tutorialChapter = GameObject.Find("Tutorial").GetComponent<TutorialScript>().tutorialChapter;
     }
 
     void Update() {
@@ -80,8 +83,11 @@ public class PlayerController : MonoBehaviour {
         if (transform.localScale.x > minSize)
         {
             audioSource.PlayOneShot(shootsound);
-        gameObject.transform.localScale /= shootscaleModifier;
-        speed *= shootspeedMultiplier;
+            if (tutorialChapter == -1)
+            {
+                gameObject.transform.localScale /= shootscaleModifier;
+                speed *= shootspeedMultiplier;
+            }
         GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
         projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z) ;
         } else
@@ -95,19 +101,24 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Move() {
-        rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0f,  Input.GetAxis("Vertical")) * speed;
+        if (tutorialChapter == -1)
+            rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0f,  Input.GetAxis("Vertical")) * speed;
     }
 
     public void RotatePlayerToMouse() {
+       
+        
 
-        Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
 
 
-        Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
-        float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
-        transform.rotation = Quaternion.Euler(new Vector3(0f, -angle - 90, 0f));
-    }
+            float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+            transform.rotation = Quaternion.Euler(new Vector3(0f, -angle - 90, 0f));
+        
+        }
+
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;

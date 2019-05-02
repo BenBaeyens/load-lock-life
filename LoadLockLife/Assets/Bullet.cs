@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour {
     Vector3 PlayerDir;
 
     public GameObject player;
+    public PlayerController ps;
 
     public float moveSpeed = 12f;
 
@@ -20,7 +21,7 @@ public class Bullet : MonoBehaviour {
         player = GameObject.Find("Player");
         MoveBullet();
         healParent = GameObject.Find("Heals");
-
+        ps = player.GetComponent<PlayerController>();
     }
 
 
@@ -39,7 +40,11 @@ public class Bullet : MonoBehaviour {
             }
             player.GetComponent<PlayerController>().KillEnemy();
             player.GetComponent<PlayerController>().enemiesKilled++;
-            Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
+            if (ps.tutorialChapter == -1)
+            {
+                Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
+            }
+           
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
