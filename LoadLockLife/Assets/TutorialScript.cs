@@ -10,13 +10,15 @@ public class TutorialScript : MonoBehaviour
 
     private void Update() {
 
-        
 
-        if (enemies[0] == null && tutorialChapter == 0) 
+        if (enemies.Length != 0)
         {
-            tutorialChapter++;
-            Chapter1Start();
+            if (enemies[0] == null && tutorialChapter == 0)
+            {
+                tutorialChapter++;
+                Chapter1Start();
 
+            }
         }
     }
 
