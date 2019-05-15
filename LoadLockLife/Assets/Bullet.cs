@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour {
     public GameObject player;
     public PlayerController ps;
 
+    ParticleSystem deathEffect;
     public float moveSpeed = 12f;
 
     GameObject healParent;
@@ -17,7 +18,16 @@ public class Bullet : MonoBehaviour {
     public GameObject heal;
 
     private void Start() {
-
+        ParticleSystem[] temp = Resources.FindObjectsOfTypeAll<ParticleSystem>();
+        for (int i = 0; i < temp.Length; i++)
+        {
+            if (temp[i].name == "DeathEffect")
+            {
+                deathEffect = temp[i];
+                Debug.Log("found deatheffect");
+                break;
+            }
+        }
         player = GameObject.Find("Player");
         MoveBullet();
         healParent = GameObject.Find("Heals");
@@ -44,7 +54,7 @@ public class Bullet : MonoBehaviour {
             {
                 Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
             }
-           
+            Destroy(Instantiate(deathEffect, other.transform.position, other.transform.rotation), 2f);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
