@@ -18,12 +18,12 @@ public class Bullet : MonoBehaviour {
     public GameObject heal;
 
     private void Start() {
-        ParticleSystem[] temp = Resources.FindObjectsOfTypeAll<ParticleSystem>();
+        GameObject[] temp = Resources.FindObjectsOfTypeAll<GameObject>();
         for (int i = 0; i < temp.Length; i++)
         {
             if (temp[i].name == "DeathEffect")
             {
-                deathEffect = temp[i];
+                deathEffect = temp[i].GetComponent<ParticleSystem>();
                 Debug.Log("found deatheffect");
                 break;
             }
@@ -54,7 +54,8 @@ public class Bullet : MonoBehaviour {
             {
                 Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
             }
-            Destroy(Instantiate(deathEffect, other.transform.position, other.transform.rotation), 2f);
+            if(deathEffect != null)
+              Destroy(Instantiate(deathEffect, other.transform.position, other.transform.rotation), 2f);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }

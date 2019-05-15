@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    GameObject deathEffect;
+    ParticleSystem deathEffect;
     Transform player;
     NavMeshAgent agent;
     // Start is called before the first frame update
@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
         {
             if(temp[i].name == "DeathEffect")
             {
-                deathEffect = temp[i];
+                deathEffect = temp[i].GetComponent<ParticleSystem>();
                 break;
             }
         }
@@ -51,8 +51,10 @@ public class EnemyController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "Player")
         {
+
             player.GetComponent<PlayerController>().Hurt();
-            Instantiate(deathEffect, transform);
+            if(deathEffect != null)
+               Instantiate(deathEffect, transform);
             Destroy(gameObject);
         }
     }
