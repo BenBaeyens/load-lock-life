@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour {
                 Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
             }
             if(deathEffect != null)
-              Destroy(Instantiate(deathEffect, other.transform.position, other.transform.rotation), 2f);
+              Destroy(Instantiate(deathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
