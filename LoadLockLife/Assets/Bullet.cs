@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour {
     public GameObject player;
     public PlayerController ps;
 
-    ParticleSystem deathEffect;
+    GameObject deathEffect;
     public float moveSpeed = 12f;
 
     GameObject healParent;
@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour {
         {
             if (temp[i].name == "DeathEffect")
             {
-                deathEffect = temp[i].GetComponent<ParticleSystem>();
+                deathEffect = temp[i];
                 Debug.Log("found deatheffect");
                 break;
             }

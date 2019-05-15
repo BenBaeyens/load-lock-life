@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    ParticleSystem deathEffect;
+    public GameObject deathEffect;
     Transform player;
     NavMeshAgent agent;
     // Start is called before the first frame update
@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
         {
             if(temp[i].name == "DeathEffect")
             {
-                deathEffect = temp[i].GetComponent<ParticleSystem>();
+                deathEffect = temp[i];
                 break;
             }
         }

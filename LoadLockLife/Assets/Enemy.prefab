@@ -223,6 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adeaae9cf77d2a148b4b275280686dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEffect: {fileID: 1190157866919430954, guid: ee7572ea6242e274ba484598f75ce277,
+    type: 3}
 --- !u!65 &227425167550385127
 BoxCollider:
   m_ObjectHideFlags: 0
