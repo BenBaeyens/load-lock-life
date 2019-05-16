@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject healsParent;
 
+    public ParticleSystem playerhurteffect;
+
   
     private void Start() {
         rb = GetComponent<Rigidbody>();
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour {
         highscore = PlayerPrefs.GetInt("highscore");
         Time.timeScale = 1f;
         tutorialChapter = GameObject.Find("Tutorial").GetComponent<TutorialScript>().tutorialChapter;
+        playerhurteffect = transform.GetChild(1).GetComponent<ParticleSystem>();
     }
 
     void Update() {
@@ -144,6 +147,7 @@ public class PlayerController : MonoBehaviour {
             audioSource.PlayOneShot(hurtsound);
             gameObject.transform.localScale /= healscaleModifier;
             speed *= healspeedMultiplier;
+            playerhurteffect.Play();
         } else
         {
             // Game Over
