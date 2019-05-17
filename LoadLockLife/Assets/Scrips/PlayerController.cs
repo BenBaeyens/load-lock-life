@@ -152,6 +152,7 @@ public class PlayerController : MonoBehaviour {
         {
             // Game Over
             gameManager.GameOver();
+            gameObject.SetActive(false);
             audioSource.PlayOneShot(deathsound, 0.25f);
         }
     }

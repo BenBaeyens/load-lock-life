@@ -15,7 +15,10 @@ public class GameManager : MonoBehaviour {
     public TextMeshProUGUI finalScore;
     public TextMeshProUGUI finalhighscore;
 
-[Header("List (Auto allocation - DO NOT CHANGE)")]
+    [Header("Booleans - DO NOT CHANGE")]
+    public bool isGameOver = false;
+
+    [Header("List (Auto allocation - DO NOT CHANGE)")]
     public GameObject player;
     public PlayerController playerController;
 
@@ -60,5 +63,6 @@ public class GameManager : MonoBehaviour {
         finalhighscore.text = finalHighScoreText + playerController.highscore.ToString();
         mainScore.gameObject.SetActive(false);
         Time.timeScale = 0.3f;
+        isGameOver = true;
     }
 }
