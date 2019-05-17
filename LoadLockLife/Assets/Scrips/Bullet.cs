@@ -50,10 +50,9 @@ public class Bullet : MonoBehaviour {
             }
             player.GetComponent<PlayerController>().KillEnemy();
             player.GetComponent<PlayerController>().enemiesKilled++;
-            if (ps.tutorialChapter == -1)
-            {
-                Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
-            }
+            
+            Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
+            
             if(deathEffect != null)
               Destroy(Instantiate(deathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
             Destroy(other.gameObject);

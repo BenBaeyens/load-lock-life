@@ -5,7 +5,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour {
 
 
-    public int tutorialChapter;
+
 
     Rigidbody rb;
     public float speed;
@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour {
         audioSource = Camera.main.GetComponent<AudioSource>();
         highscore = PlayerPrefs.GetInt("highscore");
         Time.timeScale = 1f;
-        tutorialChapter = GameObject.Find("Tutorial").GetComponent<TutorialScript>().tutorialChapter;
         playerhurteffect = GameObject.Find("PlayerHurtEffect");
     }
 
@@ -86,11 +85,10 @@ public class PlayerController : MonoBehaviour {
         if (transform.localScale.x > minSize)
         {
             audioSource.PlayOneShot(shootsound);
-            if (tutorialChapter == -1)
-            {
+           
                 gameObject.transform.localScale /= shootscaleModifier;
                 speed *= shootspeedMultiplier;
-            }
+            
         GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
         projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z) ;
         } else
@@ -104,8 +102,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Move() {
-        if (tutorialChapter == -1)
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0f,  Input.GetAxis("Vertical")) * speed;
+        rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0f,  Input.GetAxis("Vertical")) * speed;
     }
 
     public void RotatePlayerToMouse() {
