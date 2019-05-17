@@ -26,10 +26,6 @@ public class GameManager : MonoBehaviour {
     public GameObject player;
     public PlayerController playerController;
 
-    public GameObject healParent;
-    public GameObject enemyParent;
-    public GameObject enemySpawnerParent;
-
     public List<GameObject> enemySpawnPoints;
     public List<GameObject> projectiles;
     public List<GameObject> enemies;
@@ -38,34 +34,31 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
 
-        GameObject[] tempGameObjectList;
-
+        GameObject[] tempGameObjectsArray;
+        
         enemySpawnPoints = new List<GameObject>();
         projectiles = new List<GameObject>();
         enemies = new List<GameObject>();
         effects = new List<GameObject>();
         healObjects = new List<GameObject>();
 
-        tempGameObjectList = FindObjectsOfType<GameObject>();
-        for (int i = 0; i < tempGameObjectList.Length; i++)
+        tempGameObjectsArray = FindObjectsOfType<GameObject>();
+        for (int i = 0; i < tempGameObjectsArray.Length; i++)
         {
-            if (tempGameObjectList[i].GetComponent<EnemySpawner>() != null) // Find all objects that are enemy spawners
-                enemySpawnPoints.Add(tempGameObjectList[i]);
-            if (tempGameObjectList[i].GetComponent<EnemyController>() != null) // Find all objects that are enemies
-                enemies.Add(tempGameObjectList[i]);
-            if (tempGameObjectList[i].GetComponent<HealObject>() != null) // Find all objects that are heal items
-                healObjects.Add(tempGameObjectList[i]);
+            if (tempGameObjectsArray[i].GetComponent<EnemySpawner>() != null) // Find all objects that are enemy spawners
+                enemySpawnPoints.Add(tempGameObjectsArray[i]);
+            if (tempGameObjectsArray[i].GetComponent<EnemyController>() != null) // Find all objects that are enemies
+                enemies.Add(tempGameObjectsArray[i]);
+            if (tempGameObjectsArray[i].GetComponent<HealObject>() != null) // Find all objects that are heal items
+                healObjects.Add(tempGameObjectsArray[i]);
         }
 
         player = GameObject.Find("Player"); // Locate player
         playerController = player.GetComponent<PlayerController>();
-
-
-
     }
 
     private void FixedUpdate() {
-        
+        KillHealables();
     }
 
 
@@ -81,6 +74,9 @@ public class GameManager : MonoBehaviour {
 
     public void KillHealables() {
         if (healObjects.Count > maxHealItems)
+        {
             Destroy(healObjects[0]);
+            healObjects.RemoveAt(0);
+        }
     }
 }

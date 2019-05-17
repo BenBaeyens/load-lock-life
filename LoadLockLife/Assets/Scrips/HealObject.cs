@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class HealObject : MonoBehaviour
-{
+public class HealObject : MonoBehaviour {
+    GameManager gameManager;
     NavMeshAgent agent;
 
     public float radius;
     Transform player;
 
     private void Start() {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player").transform;
     }
@@ -32,6 +33,7 @@ public class HealObject : MonoBehaviour
                 other.gameObject.GetComponent<PlayerController>().Heal();
             } else
             {
+                gameManager.healObjects.Remove(gameObject);
                 other.gameObject.GetComponent<PlayerController>().Heal();
                  Destroy(gameObject);
             }
