@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour {
             finalScore.text = "YOUR SCORE: " + enemiesKilled.ToString();
             finalhighscore.text = "HIGHSCORE: " + highscore.ToString();
             scoreText.gameObject.SetActive(false);
-            Time.timeScale = 0.5f;
+            Time.timeScale = 0.3f;
         }
     }
 
