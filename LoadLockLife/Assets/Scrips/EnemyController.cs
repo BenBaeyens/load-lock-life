@@ -28,8 +28,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(player.position, transform.position);
-        if (player.GetComponent<PlayerController>().tutorialChapter == -1)
-        {
+        
             agent.SetDestination(player.position);
 
             agent.stoppingDistance = 0;
@@ -39,7 +38,7 @@ public class EnemyController : MonoBehaviour
             {
                 FaceTarget();
             }
-        }
+        
     }
 
     void FaceTarget() {

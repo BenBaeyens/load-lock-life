@@ -5,7 +5,8 @@ using TMPro;
 public class PlayerController : MonoBehaviour {
 
 
-    public int tutorialChapter;
+
+    GameManager gameManager;
 
     Rigidbody rb;
     public float speed;
@@ -31,14 +32,12 @@ public class PlayerController : MonoBehaviour {
     public AudioClip deathsound;
 
     public int enemiesKilled;
-    private int highscore;
+    public int highscore;
 
     AudioSource audioSource;
 
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI finalScore;
-    public TextMeshProUGUI finalhighscore;
-    public GameObject gameOver;
+ 
 
     public GameObject healsParent;
 
@@ -46,11 +45,11 @@ public class PlayerController : MonoBehaviour {
 
   
     private void Start() {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
         audioSource = Camera.main.GetComponent<AudioSource>();
         highscore = PlayerPrefs.GetInt("highscore");
         Time.timeScale = 1f;
-        tutorialChapter = GameObject.Find("Tutorial").GetComponent<TutorialScript>().tutorialChapter;
         playerhurteffect = GameObject.Find("PlayerHurtEffect");
     }
 
@@ -68,11 +67,6 @@ public class PlayerController : MonoBehaviour {
 
         if (speed > maxSpeed)
             speed = maxSpeed;
-
-        if(healsParent.transform.childCount > 9)
-        {
-            Destroy(healsParent.transform.GetChild(0).gameObject);
-        }
     }
 
     void FixedUpdate() {
@@ -86,11 +80,10 @@ public class PlayerController : MonoBehaviour {
         if (transform.localScale.x > minSize)
         {
             audioSource.PlayOneShot(shootsound);
-            if (tutorialChapter == -1)
-            {
+           
                 gameObject.transform.localScale /= shootscaleModifier;
                 speed *= shootspeedMultiplier;
-            }
+            
         GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
         projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z) ;
         } else
@@ -104,8 +97,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Move() {
-        if (tutorialChapter == -1)
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0f,  Input.GetAxis("Vertical")) * speed;
+        rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0f,  Input.GetAxis("Vertical")) * speed;
     }
 
     public void RotatePlayerToMouse() {
@@ -152,14 +144,8 @@ public class PlayerController : MonoBehaviour {
         } else
         {
             // Game Over
+            gameManager.GameOver();
             audioSource.PlayOneShot(deathsound, 0.25f);
-            Destroy(gameObject);
-            PlayerPrefs.SetInt("highscore", highscore);
-            gameOver.SetActive(true);
-            finalScore.text = "YOUR SCORE: " + enemiesKilled.ToString();
-            finalhighscore.text = "HIGHSCORE: " + highscore.ToString();
-            scoreText.gameObject.SetActive(false);
-            Time.timeScale = 0.3f;
         }
     }
 

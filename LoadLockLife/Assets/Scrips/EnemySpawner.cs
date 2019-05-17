@@ -5,19 +5,22 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
 
+    GameManager gameManager;
     public GameObject enemy;
     public GameObject enemyParent;
     public float time;
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        enemyParent = gameManager.transform.GetChild(1).gameObject;
         InvokeRepeating("spawnEnemy", time, time);   
     }
 
 
 
     void spawnEnemy() {
-        if (enemyParent.gameObject.transform.childCount < 20)
+        if (enemyParent.gameObject.transform.childCount < gameManager.maxEnemies && gameManager.isGameOver == false)
            Instantiate(enemy, transform.position, transform.rotation, enemyParent.transform);
     }
 
