@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour {
 
 
     public void GameOver() {
+        player.gameObject.SetActive(false);
         PlayerPrefs.SetInt("highscore", playerController.highscore);
         gameOverObject.SetActive(true);
         finalScore.text = finalScoreText + playerController.enemiesKilled.ToString();

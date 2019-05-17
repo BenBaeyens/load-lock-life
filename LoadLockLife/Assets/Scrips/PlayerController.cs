@@ -37,9 +37,7 @@ public class PlayerController : MonoBehaviour {
     AudioSource audioSource;
 
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI finalScore;
-    public TextMeshProUGUI finalhighscore;
-    public GameObject gameOver;
+ 
 
     public GameObject healsParent;
 
@@ -147,7 +145,6 @@ public class PlayerController : MonoBehaviour {
         {
             // Game Over
             gameManager.GameOver();
-            gameObject.SetActive(false);
             audioSource.PlayOneShot(deathsound, 0.25f);
         }
     }
