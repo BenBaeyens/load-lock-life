@@ -5,10 +5,14 @@ using TMPro;
 
 public class GameManager : MonoBehaviour {
 
+    [Header("Game Settings")]
+    public int maxHealItems;
+    public int maxEnemies;
+
+
     [Header("UI elements")]
     public string finalScoreText = "YOUR SCORE: ";
     public string finalHighScoreText = "HIGHSCORE: ";
-
 
     public GameObject gameOverObject;
     public TextMeshProUGUI mainScore;
@@ -22,6 +26,10 @@ public class GameManager : MonoBehaviour {
     public GameObject player;
     public PlayerController playerController;
 
+    public GameObject healParent;
+    public GameObject enemyParent;
+    public GameObject enemySpawnerParent;
+
     public List<GameObject> enemySpawnPoints;
     public List<GameObject> projectiles;
     public List<GameObject> enemies;
@@ -29,6 +37,7 @@ public class GameManager : MonoBehaviour {
     public List<GameObject> effects;
 
     private void Start() {
+
         GameObject[] tempGameObjectList;
 
         enemySpawnPoints = new List<GameObject>();
@@ -55,6 +64,10 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    private void FixedUpdate() {
+        
+    }
+
 
     public void GameOver() {
         PlayerPrefs.SetInt("highscore", playerController.highscore);
@@ -64,5 +77,10 @@ public class GameManager : MonoBehaviour {
         mainScore.gameObject.SetActive(false);
         Time.timeScale = 0.3f;
         isGameOver = true;
+    }
+
+    public void KillHealables() {
+        if (healObjects.Count > maxHealItems)
+            Destroy(healObjects[0]);
     }
 }

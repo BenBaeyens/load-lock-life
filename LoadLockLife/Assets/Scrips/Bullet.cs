@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour { 
-    
+public class Bullet : MonoBehaviour {
 
+    GameManager gameManager;
     Vector3 PlayerDir;
 
     public GameObject player;
@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour {
     public GameObject heal;
 
     private void Start() {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         GameObject[] temp = Resources.FindObjectsOfTypeAll<GameObject>();
         for (int i = 0; i < temp.Length; i++)
         {
@@ -51,8 +52,8 @@ public class Bullet : MonoBehaviour {
             player.GetComponent<PlayerController>().KillEnemy();
             player.GetComponent<PlayerController>().enemiesKilled++;
             
-            Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
-            
+            GameObject healtemp = Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
+            gameManager.healObjects.Add(healtemp);
             if(deathEffect != null)
               Destroy(Instantiate(deathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
             Destroy(other.gameObject);

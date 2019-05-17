@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
 
 
     void spawnEnemy() {
-        if (enemyParent.gameObject.transform.childCount < 20 && gameManager.isGameOver == false)
+        if (enemyParent.gameObject.transform.childCount < gameManager.maxEnemies && gameManager.isGameOver == false)
            Instantiate(enemy, transform.position, transform.rotation, enemyParent.transform);
     }
 
