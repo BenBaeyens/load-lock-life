@@ -13,9 +13,9 @@ public class Bullet : MonoBehaviour {
     GameObject deathEffect;
     public float moveSpeed = 12f;
 
-    GameObject healParent;
+    public GameObject healParent;
 
-    public GameObject heal;
+    GameObject heal;
 
     private void Start() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour {
         }
         player = GameObject.Find("Player");
         MoveBullet();
-        healParent = GameObject.Find("Heals");
+        healParent = gameManager.transform.GetChild(0).gameObject;
         ps = player.GetComponent<PlayerController>();
     }
 
