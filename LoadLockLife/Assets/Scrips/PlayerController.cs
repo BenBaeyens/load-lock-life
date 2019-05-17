@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour {
         {
             // Game Over
             audioSource.PlayOneShot(deathsound, 0.25f);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             PlayerPrefs.SetInt("highscore", highscore);
             gameOver.SetActive(true);
             finalScore.text = "YOUR SCORE: " + enemiesKilled.ToString();
