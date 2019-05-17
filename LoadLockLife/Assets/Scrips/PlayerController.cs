@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 
 
-    public GameManager gameManager;
+    GameManager gameManager;
 
     Rigidbody rb;
     public float speed;
