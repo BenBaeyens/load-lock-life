@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 
 
+    public GameManager gameManager;
 
     Rigidbody rb;
     public float speed;
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour {
     public AudioClip deathsound;
 
     public int enemiesKilled;
-    private int highscore;
+    public int highscore;
 
     AudioSource audioSource;
 
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour {
 
   
     private void Start() {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
         audioSource = Camera.main.GetComponent<AudioSource>();
         highscore = PlayerPrefs.GetInt("highscore");
@@ -149,14 +151,8 @@ public class PlayerController : MonoBehaviour {
         } else
         {
             // Game Over
+            gameManager.GameOver();
             audioSource.PlayOneShot(deathsound, 0.25f);
-            gameObject.SetActive(false);
-            PlayerPrefs.SetInt("highscore", highscore);
-            gameOver.SetActive(true);
-            finalScore.text = "YOUR SCORE: " + enemiesKilled.ToString();
-            finalhighscore.text = "HIGHSCORE: " + highscore.ToString();
-            scoreText.gameObject.SetActive(false);
-            Time.timeScale = 0.3f;
         }
     }
 

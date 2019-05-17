@@ -1,16 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
+
+    [Header("UI elements")]
+    public string finalScoreText = "YOUR SCORE: ";
+    public string finalHighScoreText = "HIGHSCORE: ";
+
+
+    public GameObject gameOverObject;
+    public TextMeshProUGUI mainScore;
+    public TextMeshProUGUI finalScore;
+    public TextMeshProUGUI finalhighscore;
+
+[Header("List (Auto allocation - DO NOT CHANGE)")]
+    public GameObject player;
+    public PlayerController playerController;
+
     public List<GameObject> enemySpawnPoints;
     public List<GameObject> projectiles;
     public List<GameObject> enemies;
     public List<GameObject> healObjects;
     public List<GameObject> effects;
-
-    public GameObject player;
 
     private void Start() {
         GameObject[] tempGameObjectList;
@@ -33,8 +46,19 @@ public class GameManager : MonoBehaviour
         }
 
         player = GameObject.Find("Player"); // Locate player
+        playerController = player.GetComponent<PlayerController>();
 
 
 
+    }
+
+
+    public void GameOver() {
+        PlayerPrefs.SetInt("highscore", playerController.highscore);
+        gameOverObject.SetActive(true);
+        finalScore.text = finalScoreText + playerController.enemiesKilled.ToString();
+        finalhighscore.text = finalHighScoreText + playerController.highscore.ToString();
+        mainScore.gameObject.SetActive(false);
+        Time.timeScale = 0.3f;
     }
 }
