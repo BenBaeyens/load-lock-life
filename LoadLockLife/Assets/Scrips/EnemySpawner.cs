@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         enemyParent = gameManager.transform.GetChild(1).gameObject;
-        InvokeRepeating("spawnEnemy", time, time);   
+        InvokeRepeating("spawnEnemy", 2, time);   
     }
 
 
