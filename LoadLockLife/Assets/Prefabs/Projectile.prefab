@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a73b2089523cfbd48b1790dc914fa13a, type: 2}
+  - {fileID: 2100000, guid: e4e138fcee5c56e45b72b08e03c14aae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,8 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  ps: {fileID: 0}
   moveSpeed: 10
-  heal: {fileID: 1248552178463636255, guid: 7150b8ef0ec703746b3ee4d21bc4ea75, type: 3}
+  healParent: {fileID: 0}
 --- !u!54 &818464600302040164
 Rigidbody:
   m_ObjectHideFlags: 0
