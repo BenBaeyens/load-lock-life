@@ -87,6 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6786954560483877818}
   - component: {fileID: 6786954560483877819}
+  - component: {fileID: 7952154379864253045}
   m_Layer: 0
   m_Name: EnemySpawner 1
   m_TagString: Untagged
@@ -123,4 +124,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 3613501368303837379, guid: 669b87b61e8ae894ab4f87405915382a, type: 3}
   enemyParent: {fileID: 0}
-  time: 5
+  time: 2.5
+--- !u!95 &7952154379864253045
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6786954560483877816}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 11df2b065befa564fbea90153ade24f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
