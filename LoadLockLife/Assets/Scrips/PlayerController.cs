@@ -31,11 +31,12 @@ public class PlayerController : MonoBehaviour {
     public AudioClip errorsound;
     public AudioClip hurtsound;
     public AudioClip deathsound;
+    public AudioClip godmodeSound;
 
     public int enemiesKilled;
     public int highscore;
 
-    AudioSource audioSource;
+    public AudioSource audioSource;
 
     Material playermat;
     public Material infshooting;
@@ -150,7 +151,7 @@ public class PlayerController : MonoBehaviour {
         audioSource.PlayOneShot(popsound);
     }
 
-    public void Hurt() {
+    public void Hurt() { 
         if (transform.localScale.x > minSize && canBeHurt)
         {
             audioSource.PlayOneShot(hurtsound);
@@ -158,6 +159,9 @@ public class PlayerController : MonoBehaviour {
             speed *= healspeedMultiplier;
             playerhurteffect.transform.position = transform.position;
             playerhurteffect.GetComponent<ParticleSystem>().Play();
+
+       
+
         } else if (transform.localScale.x < minSize && canBeHurt)
         {
 
