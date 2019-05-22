@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
+        enemyParent = GameObject.Find("GameManager").transform.GetChild(1).gameObject;
         animator = GetComponent<Animator>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         enemyParent = gameManager.transform.GetChild(1).gameObject;
