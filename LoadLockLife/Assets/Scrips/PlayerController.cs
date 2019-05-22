@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour {
 
 
     private void Start() {
+        projectile.GetComponent<Renderer>().material = defaultbullet;
         playermat = gameObject.GetComponent<Renderer>().material;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
@@ -189,7 +190,8 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(gameManager.infShootingLenght);
         gameObject.GetComponent<Renderer>().material = playermat;
         infiniteShooting = false;
-        
+        projectile.GetComponent<Renderer>().material = defaultbullet;
+
     }
 
     public void BlastPowerup() {
@@ -200,10 +202,10 @@ public class PlayerController : MonoBehaviour {
         {
             
             Debug.Log(currentdegree);
-            Quaternion rotation = new Quaternion(transform.rotation.x, currentdegree / 60, transform.rotation.z, transform.rotation.w);
-            GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, rotation, projectileParent.transform);
+            GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
+            projectileobject.transform.eulerAngles = new Vector3(transform.rotation.x, currentdegree, transform.rotation.z);
             projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z);
-            projectileobject.transform.rotation = rotation;
+            
             currentdegree += degree;
         }
         isblastdone = true;
