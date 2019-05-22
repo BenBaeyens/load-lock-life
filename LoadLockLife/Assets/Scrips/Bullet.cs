@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
     GameManager gameManager;
-    Vector3 PlayerDir;
+    Vector3 Dir;
 
     public GameObject player;
     public PlayerController ps;
@@ -63,9 +63,9 @@ public class Bullet : MonoBehaviour {
     }
 
     void MoveBullet() {
-      
-        PlayerDir = player.transform.forward;
-        GetComponent<Rigidbody>().velocity = PlayerDir * moveSpeed;
+        
+        Dir = transform.forward;
+        GetComponent<Rigidbody>().velocity = Dir * moveSpeed;
         StartCoroutine(DestroyBullet());
     }
 

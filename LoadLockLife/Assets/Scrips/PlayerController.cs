@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour {
 
     Material playermat;
     public Material infshooting;
+    public Material defaultbullet;
     public Material godmode;
 
     public bool canBeHurt = true;
@@ -197,13 +198,13 @@ public class PlayerController : MonoBehaviour {
         float currentdegree = 0;
         for (int i = 0; i < gameManager.blastProjectiles; i++)
         {
-            currentdegree += degree * i;
+            
             Debug.Log(currentdegree);
             Quaternion rotation = new Quaternion(transform.rotation.x, currentdegree / 60, transform.rotation.z, transform.rotation.w);
             GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, rotation, projectileParent.transform);
             projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z);
-            
-            currentdegree += degree * i;
+            projectileobject.transform.rotation = rotation;
+            currentdegree += degree;
         }
         isblastdone = true;
     }
