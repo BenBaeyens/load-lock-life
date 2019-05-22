@@ -17,7 +17,8 @@ public class EnemySpawner : MonoBehaviour
         animator = GetComponent<Animator>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         enemyParent = gameManager.transform.GetChild(1).gameObject;
-        InvokeRepeating("spawnEnemy", 2, time);   
+        InvokeRepeating("spawnEnemy", 2, time);
+        InvokeRepeating("spawnEnemyAnimation", 0, time);
     }
 
 
@@ -25,9 +26,16 @@ public class EnemySpawner : MonoBehaviour
     void spawnEnemy() {
         if (enemyParent.gameObject.transform.childCount < gameManager.maxEnemies && gameManager.isGameOver == false)
         {
-            animator.Play("enemyspawner");
+           
             Instantiate(enemy, transform.position, transform.rotation, enemyParent.transform);
 
+        }
+    }
+
+    void spawnEnemyAnimation() {
+        if (enemyParent.gameObject.transform.childCount < gameManager.maxEnemies && gameManager.isGameOver == false)
+        {
+            animator.Play("enemyspawner");
         }
     }
 
