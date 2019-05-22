@@ -15,7 +15,7 @@ public class BlastPowerup : MonoBehaviour {
         if (other.gameObject == player)
         {
             player.GetComponent<PlayerController>().BlastPowerup();
-            player.GetComponent<Renderer>().material = gameObject.GetComponent<Renderer>().material;
+            
             Destroy(gameObject);
         }
     }

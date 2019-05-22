@@ -164,6 +164,14 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void enableGodMode() {
+        StartCoroutine(GodMode());
+    }
+
+    public void enableInfiniteShooting() {
+        StartCoroutine(InfiniteShooting());
+    }
+
     public IEnumerator GodMode() {
         canBeHurt = false;
         Debug.Log("test1");

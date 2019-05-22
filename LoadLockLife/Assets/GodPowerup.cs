@@ -15,7 +15,7 @@ public class GodPowerup : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject == player)
         {
-            StartCoroutine(player.GetComponent<PlayerController>().GodMode());
+            player.GetComponent<PlayerController>().enableGodMode();
             player.GetComponent<Renderer>().material = gameObject.GetComponent<Renderer>().material;
             Destroy(gameObject);
         }

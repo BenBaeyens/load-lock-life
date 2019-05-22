@@ -14,7 +14,7 @@ public class InfiniteShootingPowerup : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject == player)
         {
-            StartCoroutine(player.GetComponent<PlayerController>().InfiniteShooting());
+            player.GetComponent<PlayerController>().enableInfiniteShooting();
             player.GetComponent<Renderer>().material = gameObject.GetComponent<Renderer>().material;
             Destroy(gameObject);
         }
