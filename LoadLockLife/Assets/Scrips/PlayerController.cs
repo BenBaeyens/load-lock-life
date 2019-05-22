@@ -43,15 +43,16 @@ public class PlayerController : MonoBehaviour {
 
     public bool canBeHurt = true;
     bool infiniteShooting = false;
+    public bool isblastdone = true;
 
     public TextMeshProUGUI scoreText;
- 
+
 
     public GameObject healsParent;
 
     public GameObject playerhurteffect;
 
-  
+
     private void Start() {
         playermat = gameObject.GetComponent<Renderer>().material;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 
         scoreText.text = enemiesKilled.ToString();
 
-        if(enemiesKilled >= highscore)
+        if (enemiesKilled >= highscore)
         {
             highscore = enemiesKilled;
         }
@@ -90,44 +91,42 @@ public class PlayerController : MonoBehaviour {
             audioSource.PlayOneShot(shootsound);
             GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
             projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z);
-        }
-
-        else if (transform.localScale.x > minSize)
+        } else if (transform.localScale.x > minSize)
         {
             audioSource.PlayOneShot(shootsound);
-           
-                gameObject.transform.localScale /= shootscaleModifier;
-                speed *= shootspeedMultiplier;
-            
-             GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
-             projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z) ;
+
+            gameObject.transform.localScale /= shootscaleModifier;
+            speed *= shootspeedMultiplier;
+
+            GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
+            projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z);
         } else
         {
-            
+
             audioSource.PlayOneShot(errorsound, 0.25f);
-          
+
         }
 
-       
+
     }
 
     public void Move() {
-        rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0f,  Input.GetAxis("Vertical")) * speed;
+        rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")) * speed;
     }
 
     public void RotatePlayerToMouse() {
-       
-        
-
-            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
 
 
-            Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
-            float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, -angle - 90, 0f));
-        
-        }
+        Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+
+
+        Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+        float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+        transform.rotation = Quaternion.Euler(new Vector3(0f, -angle - 90, 0f));
+
+    }
 
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
@@ -135,7 +134,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Heal() {
-        if(gameObject.transform.localScale.x < maxSize)
+        if (gameObject.transform.localScale.x < maxSize)
         {
             speed /= shootspeedMultiplier;
             transform.localScale *= healscaleModifier;
@@ -156,9 +155,9 @@ public class PlayerController : MonoBehaviour {
             speed *= healspeedMultiplier;
             playerhurteffect.transform.position = transform.position;
             playerhurteffect.GetComponent<ParticleSystem>().Play();
-        } else if(transform.localScale.x < minSize && canBeHurt)
-        { 
-        
+        } else if (transform.localScale.x < minSize && canBeHurt)
+        {
+
             // Game Over
             gameManager.GameOver();
             audioSource.PlayOneShot(deathsound, 0.25f);
@@ -179,11 +178,28 @@ public class PlayerController : MonoBehaviour {
         infiniteShooting = true;
         projectile.GetComponent<Renderer>().material = infshooting;
         Debug.Log("test1");
-        
+
         yield return new WaitForSeconds(gameManager.infShootingLenght);
         Debug.Log("test2");
         gameObject.GetComponent<Renderer>().material = playermat;
         infiniteShooting = false;
+    }
+
+    public void BlastPowerup() {
+        isblastdone = false;
+        float degree = 360 / gameManager.blastProjectiles;
+        float currentdegree = 0;
+        for (int i = 0; i < gameManager.blastProjectiles; i++)
+        {
+            currentdegree += degree * i;
+            Debug.Log(currentdegree);
+            Quaternion rotation = new Quaternion(transform.rotation.x, currentdegree / 60, transform.rotation.z, transform.rotation.w);
+            GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, rotation, projectileParent.transform);
+            projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z);
+            
+            currentdegree += degree * i;
+        }
+        isblastdone = true;
     }
 
 }

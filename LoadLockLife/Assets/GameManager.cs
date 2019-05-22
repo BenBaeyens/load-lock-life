@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public int maxEnemies;
     public float godModeLenght;
     public float infShootingLenght;
+    public int blastProjectiles;
     
 
 

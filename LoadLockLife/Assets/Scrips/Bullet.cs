@@ -63,8 +63,7 @@ public class Bullet : MonoBehaviour {
     }
 
     void MoveBullet() {
-        transform.position = player.transform.position;
-        transform.rotation = player.transform.rotation;
+      
         PlayerDir = player.transform.forward;
         GetComponent<Rigidbody>().velocity = PlayerDir * moveSpeed;
         StartCoroutine(DestroyBullet());
