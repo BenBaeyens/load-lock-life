@@ -996,6 +996,8 @@ MonoBehaviour:
   enemiesKilled: 0
   highscore: 0
   infshooting: {fileID: 2100000, guid: 824d090f37c08d641bbf61c4d716b605, type: 2}
+  defaultbullet: {fileID: 2100000, guid: e4e138fcee5c56e45b72b08e03c14aae, type: 2}
+  blast: {fileID: 2100000, guid: c0148b43af6ab0445bb3ece052d7f388, type: 2}
   godmode: {fileID: 2100000, guid: 7ba32205c6595d248987299353419e8b, type: 2}
   canBeHurt: 1
   isblastdone: 1
@@ -1213,7 +1215,7 @@ MonoBehaviour:
   maxEnemies: 20
   godModeLenght: 5
   infShootingLenght: 0
-  blastProjectiles: 10
+  blastProjectiles: 20
   finalScoreText: 'YOUR SCORE: '
   finalHighScoreText: 'HIGHSCORE: '
   gameOverObject: {fileID: 1470381469}

@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
     Material playermat;
     public Material infshooting;
     public Material defaultbullet;
+    public Material blast;
     public Material godmode;
 
     public bool canBeHurt = true;
@@ -197,6 +198,7 @@ public class PlayerController : MonoBehaviour {
     public void BlastPowerup() {
         isblastdone = false;
         float degree = 360 / gameManager.blastProjectiles;
+        projectile.GetComponent<Renderer>().material = blast;
         float currentdegree = 0;
         for (int i = 0; i < gameManager.blastProjectiles; i++)
         {
@@ -209,6 +211,7 @@ public class PlayerController : MonoBehaviour {
             currentdegree += degree;
         }
         isblastdone = true;
+        projectile.GetComponent<Renderer>().material = defaultbullet;
     }
 
 }
