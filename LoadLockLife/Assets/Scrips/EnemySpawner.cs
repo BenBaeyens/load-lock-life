@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemy;
     public GameObject enemyParent;
     public float time;
+    public bool isSpawnable = true;
 
     void Start()
     {
@@ -18,27 +19,39 @@ public class EnemySpawner : MonoBehaviour
         animator = GetComponent<Animator>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         enemyParent = gameManager.transform.GetChild(1).gameObject;
-        InvokeRepeating("spawnEnemy", 2, time);
-        InvokeRepeating("spawnEnemyAnimation", 0, time);
+        InvokeRepeating("randomTime", 1, 1);
     }
 
 
 
-    void spawnEnemy() {
-        if (enemyParent.gameObject.transform.childCount < gameManager.maxEnemies && gameManager.isGameOver == false)
-        {
-           
-            Instantiate(enemy, transform.position, transform.rotation, enemyParent.transform);
-
+    void randomTime() {
+        if (isSpawnable) {
+            time = Random.Range(1f, 4f);
+            StartCoroutine(spawnEnemy());
+            isSpawnable = false;
         }
     }
 
-    void spawnEnemyAnimation() {
         if (enemyParent.gameObject.transform.childCount < gameManager.maxEnemies && gameManager.isGameOver == false)
         {
-            animator.Play("enemyspawner");
-        }
-    }
+ 
 
+   
+
+
+    IEnumerator spawnEnemy() {
+        yield return new WaitForSeconds(time);
+            
+            if (enemyParent.gameObject.transform.childCount < gameManager.maxEnemies && gameManager.isGameOver == false)
+            {
+                animator.Play("enemyspawner");
+                yield return new WaitForSeconds(2);
+                Instantiate(enemy, transform.position, transform.rotation, enemyParent.transform);
+            }
+            isSpawnable = true;
+
+        
+        
+    }
   
 }
