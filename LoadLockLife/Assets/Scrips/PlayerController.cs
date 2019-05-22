@@ -38,8 +38,11 @@ public class PlayerController : MonoBehaviour {
     AudioSource audioSource;
 
     Material playermat;
+    public Material infshooting;
+    public Material godmode;
 
     public bool canBeHurt = true;
+    bool infiniteShooting = false;
 
     public TextMeshProUGUI scoreText;
  
@@ -83,15 +86,21 @@ public class PlayerController : MonoBehaviour {
 
 
     public void Shoot() {
-        if (transform.localScale.x > minSize)
+        if (infiniteShooting) {
+            audioSource.PlayOneShot(shootsound);
+            GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
+            projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z);
+        }
+
+        else if (transform.localScale.x > minSize)
         {
             audioSource.PlayOneShot(shootsound);
            
                 gameObject.transform.localScale /= shootscaleModifier;
                 speed *= shootspeedMultiplier;
             
-        GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
-        projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z) ;
+             GameObject projectileobject = Instantiate(projectile, gameObject.transform.GetChild(0).transform.position, transform.rotation, projectileParent.transform);
+             projectileobject.transform.localScale = new Vector3(transform.localScale.x * projectileobject.transform.localScale.x, transform.localScale.y * projectileobject.transform.localScale.y, transform.localScale.z * projectileobject.transform.localScale.z) ;
         } else
         {
             
@@ -164,6 +173,17 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("test2");
         gameObject.GetComponent<Renderer>().material = playermat;
         canBeHurt = true;
+    }
+
+    public IEnumerator InfiniteShooting() {
+        infiniteShooting = true;
+        projectile.GetComponent<Renderer>().material = infshooting;
+        Debug.Log("test1");
+        
+        yield return new WaitForSeconds(gameManager.infShootingLenght);
+        Debug.Log("test2");
+        gameObject.GetComponent<Renderer>().material = playermat;
+        infiniteShooting = false;
     }
 
 }
