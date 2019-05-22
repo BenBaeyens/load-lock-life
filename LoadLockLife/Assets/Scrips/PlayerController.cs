@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour {
         canBeHurt = false;
         Debug.Log("test1");
         gameObject.transform.localScale = new Vector3(maxSize, maxSize, maxSize);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(gameManager.godModeLenght);
         Debug.Log("test2");
         gameObject.GetComponent<Renderer>().material = playermat;
         canBeHurt = true;
@@ -185,10 +185,7 @@ public class PlayerController : MonoBehaviour {
     public IEnumerator InfiniteShooting() {
         infiniteShooting = true;
         projectile.GetComponent<Renderer>().material = infshooting;
-        Debug.Log("test1");
-
         yield return new WaitForSeconds(gameManager.infShootingLenght);
-        Debug.Log("test2");
         gameObject.GetComponent<Renderer>().material = playermat;
         infiniteShooting = false;
         
