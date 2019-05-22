@@ -183,6 +183,7 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("test2");
         gameObject.GetComponent<Renderer>().material = playermat;
         infiniteShooting = false;
+        
     }
 
     public void BlastPowerup() {
