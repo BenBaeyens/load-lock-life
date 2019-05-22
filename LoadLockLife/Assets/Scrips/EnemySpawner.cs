@@ -32,8 +32,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-        if (enemyParent.gameObject.transform.childCount < gameManager.maxEnemies && gameManager.isGameOver == false)
-        {
  
 
    

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
@@ -36,6 +37,10 @@ public class PlayerController : MonoBehaviour {
 
     AudioSource audioSource;
 
+    Material playermat;
+
+    public bool canBeHurt = true;
+
     public TextMeshProUGUI scoreText;
  
 
@@ -45,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 
   
     private void Start() {
+        playermat = gameObject.GetComponent<Renderer>().material;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
         audioSource = Camera.main.GetComponent<AudioSource>();
@@ -134,19 +140,30 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Hurt() {
-        if (transform.localScale.x > minSize)
+        if (transform.localScale.x > minSize && canBeHurt)
         {
             audioSource.PlayOneShot(hurtsound);
             gameObject.transform.localScale /= healscaleModifier;
             speed *= healspeedMultiplier;
             playerhurteffect.transform.position = transform.position;
             playerhurteffect.GetComponent<ParticleSystem>().Play();
-        } else
-        {
+        } else if(transform.localScale.x < minSize && canBeHurt)
+        { 
+        
             // Game Over
             gameManager.GameOver();
             audioSource.PlayOneShot(deathsound, 0.25f);
         }
+    }
+
+    public IEnumerator GodMode() {
+        canBeHurt = false;
+        Debug.Log("test1");
+        gameObject.transform.localScale = new Vector3(maxSize, maxSize, maxSize);
+        yield return new WaitForSeconds(1f);
+        Debug.Log("test2");
+        gameObject.GetComponent<Renderer>().material = playermat;
+        canBeHurt = true;
     }
 
 }

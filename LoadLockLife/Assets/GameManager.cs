@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour {
     [Header("Game Settings")]
     public int maxHealItems;
     public int maxEnemies;
+    public float godModeLenght;
+    public float infShootingLenght;
+    
 
 
     [Header("UI elements")]
