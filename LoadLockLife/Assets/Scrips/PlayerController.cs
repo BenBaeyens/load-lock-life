@@ -84,6 +84,9 @@ public class PlayerController : MonoBehaviour {
             speed = maxSpeed;
         if (!canBeHurt || infiniteShooting || !isblastdone)
             hasPowerup = true;
+        else
+            hasPowerup = false;
+        
     }
 
     void FixedUpdate() {

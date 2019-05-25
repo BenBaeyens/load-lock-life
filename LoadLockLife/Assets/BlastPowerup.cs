@@ -12,7 +12,7 @@ public class BlastPowerup : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject == player)
+        if (other.gameObject == player && !player.GetComponent<PlayerController>().hasPowerup)
         {
             player.GetComponent<PlayerController>().BlastPowerup();
             
