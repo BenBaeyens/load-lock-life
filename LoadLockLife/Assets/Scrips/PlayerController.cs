@@ -187,10 +187,8 @@ public class PlayerController : MonoBehaviour {
 
     public IEnumerator GodMode() {
         canBeHurt = false;
-        Debug.Log("test1");
         gameObject.transform.localScale = new Vector3(maxSize, maxSize, maxSize);
         yield return new WaitForSeconds(gameManager.godModeLenght);
-        Debug.Log("test2");
         gameObject.GetComponent<Renderer>().material = playermat;
         canBeHurt = true;
     }

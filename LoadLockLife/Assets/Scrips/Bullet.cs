@@ -25,7 +25,6 @@ public class Bullet : MonoBehaviour {
             if (temp[i].name == "DeathEffect")
             {
                 deathEffect = temp[i];
-                Debug.Log("found deatheffect");
                 break;
             }
         }
@@ -44,7 +43,6 @@ public class Bullet : MonoBehaviour {
             {
                 if(tempObj[i].name == "Heal")
                 {
-                    Debug.Log("found");
                     heal = tempObj[i];
                     break;
                 }
