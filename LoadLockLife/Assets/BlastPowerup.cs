@@ -19,6 +19,10 @@ public class BlastPowerup : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerStay(Collider other) {
+        OnTriggerEnter(other);
+    }
 }
 
 

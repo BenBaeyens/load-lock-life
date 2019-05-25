@@ -20,4 +20,8 @@ public class GodPowerup : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerStay(Collider other) {
+        OnTriggerEnter(other);
+    }
 }
