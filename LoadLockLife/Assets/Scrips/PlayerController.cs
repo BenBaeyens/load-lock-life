@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour {
     public bool canBeHurt = true;
     bool infiniteShooting = false;
     public bool isblastdone = true;
+    public bool hasPowerup;
 
     public TextMeshProUGUI scoreText;
 
@@ -81,6 +82,8 @@ public class PlayerController : MonoBehaviour {
 
         if (speed > maxSpeed)
             speed = maxSpeed;
+        if (!canBeHurt || infiniteShooting || !isblastdone)
+            hasPowerup = true;
     }
 
     void FixedUpdate() {
