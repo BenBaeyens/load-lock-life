@@ -5,21 +5,21 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    GameManager gameManager;
     public GameObject deathEffect;
     Transform player;
     NavMeshAgent agent;
+
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         GameObject[] temp = Resources.FindObjectsOfTypeAll<GameObject>();
-        for (int i = 0; i < temp.Length; i++)
+        foreach (GameObject g in temp)
         {
-            if(temp[i].name == "DeathEffect")
-            {
-                deathEffect = temp[i];
-                break;
-            }
+            if (g.name == "DeathEffect")
+                deathEffect = g;
         }
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
@@ -51,6 +51,7 @@ public class EnemyController : MonoBehaviour
         if (other.gameObject.name == "Player")
         {
 
+            
             player.GetComponent<PlayerController>().Hurt();
             if(deathEffect != null)
                Instantiate(deathEffect, transform);
@@ -63,4 +64,7 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+  
+
 }

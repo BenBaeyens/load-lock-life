@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour {
     public float godModeLenght;
     public float infShootingLenght;
     public int blastProjectiles;
-    
+
+    public int blastPowerupDropRate = 40;
+    public int godModePowerupDropRate = 60;
+    public int infShotPowerupDropRate = 100;
 
 
     [Header("UI elements")]
