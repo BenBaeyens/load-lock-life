@@ -96,6 +96,9 @@ MonoBehaviour:
   ps: {fileID: 0}
   moveSpeed: 10
   healParent: {fileID: 0}
+  godModePrefab: {fileID: 0}
+  infShotPrefab: {fileID: 0}
+  blastPrefab: {fileID: 0}
 --- !u!54 &818464600302040164
 Rigidbody:
   m_ObjectHideFlags: 0

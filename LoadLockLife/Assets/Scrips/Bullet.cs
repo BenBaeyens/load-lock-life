@@ -13,10 +13,10 @@ public class Bullet : MonoBehaviour {
     GameObject deathEffect;
     public float moveSpeed = 12f;
 
-    public GameObject healParent;
-    public GameObject godModePrefab;
-    public GameObject infShotPrefab;
-    public GameObject blastPrefab;
+    GameObject healParent;
+    GameObject godModePrefab;
+    GameObject infShotPrefab;
+    GameObject blastPrefab;
 
     GameObject heal;
 
