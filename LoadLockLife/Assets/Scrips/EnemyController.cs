@@ -56,6 +56,7 @@ public class EnemyController : MonoBehaviour
                Instantiate(deathEffect, transform);
             if (!player.GetComponent<PlayerController>().canBeHurt)
             {
+                player.GetComponent<PlayerController>().enemiesKilled++;
                 player.GetComponent<PlayerController>().audioSource.PlayOneShot(player.GetComponent<PlayerController>().godmodeSound);
                 Destroy(Instantiate(deathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
             }
