@@ -40,7 +40,12 @@ public class MenuScript : MonoBehaviour {
     }
 
     public void SelectDifficulty(string d) {
-        PlayerPrefs.SetString("difficulty", d);
+        if(d == "hitman")
+            PlayerPrefs.SetInt("difficulty", 3);
+        if (d == "beginner")
+            PlayerPrefs.SetInt("difficulty", 1);
+        if (d == "hobbyist")
+            PlayerPrefs.SetInt("difficulty", 2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
