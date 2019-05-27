@@ -39,7 +39,8 @@ public class MenuScript : MonoBehaviour {
         }
     }
 
-    public void Play() {
+    public void SelectDifficulty(string d) {
+        PlayerPrefs.SetString("difficulty", d);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
