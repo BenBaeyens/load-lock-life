@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 6472701101555925464}
   - component: {fileID: 227425167550385127}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: DefaultEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,6 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 1190157866919430954, guid: ee7572ea6242e274ba484598f75ce277,
     type: 3}
+  enemyType: 0
+  enemyHealth: 0
 --- !u!65 &227425167550385127
 BoxCollider:
   m_ObjectHideFlags: 0

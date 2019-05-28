@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 3613501368303837404}
   - component: {fileID: -972178371511464478}
   - component: {fileID: 1875707413056526025}
-  - component: {fileID: 6472701101555925464}
   - component: {fileID: 227425167550385127}
   - component: {fileID: -1570604402483825442}
   m_Layer: 0
@@ -123,7 +122,7 @@ Transform:
   m_GameObject: {fileID: 3613501368303837379}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.4220128, y: 1.0023326, z: -4.1004786}
-  m_LocalScale: {x: 1.24228, y: 1.24228, z: 1.24228}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 7506390742735390169}
   m_Father: {fileID: 0}
@@ -154,7 +153,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 350094946107a944c88be74adb2188e6, type: 2}
+  - {fileID: 2100000, guid: a3538392522e32d45bb8f0ccaab7eed9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -212,22 +211,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6472701101555925464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3613501368303837379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adeaae9cf77d2a148b4b275280686dc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathEffect: {fileID: 1190157866919430954, guid: ee7572ea6242e274ba484598f75ce277,
-    type: 3}
-  enemyType: 0
-  enemyHealth: 0
 --- !u!65 &227425167550385127
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -254,4 +237,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 0}
-  enemyHealth: 0
+  enemyHealth: 2

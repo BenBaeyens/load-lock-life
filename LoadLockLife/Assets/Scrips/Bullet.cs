@@ -59,10 +59,10 @@ public class Bullet : MonoBehaviour {
                 KillEnemy(other);
             } else
             {
-                other.transform.localScale /= 2;
+                other.transform.localScale /= 1.3f;
                 player.GetComponent<PlayerController>().KillEnemy();
-                if(deathEffect != null)
-                    Destroy(Instantiate(bigdeathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f)
+                if (deathEffect != null)
+                    Destroy(Instantiate(bigdeathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
             }
         }
       
