@@ -33,6 +33,8 @@ public class Bullet : MonoBehaviour {
                 blastPrefab = g;
             if (g.name == "DeathEffect")
                 deathEffect = g;
+            if (g.name == "Heal")
+                heal = g;
             player = GameObject.Find("Player");
             MoveBullet();
             healParent = gameManager.transform.GetChild(0).gameObject;
@@ -44,15 +46,6 @@ public class Bullet : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.name.Contains("Enemy"))
         {
-            GameObject[] tempObj = Resources.FindObjectsOfTypeAll<GameObject>();
-            for (int i = 0; i < tempObj.Length; i++)
-            {
-                if(tempObj[i].name == "Heal")
-                {
-                    heal = tempObj[i];
-                    break;
-                }
-            }
             player.GetComponent<PlayerController>().KillEnemy();
             player.GetComponent<PlayerController>().enemiesKilled++;
             PowerupDrop();

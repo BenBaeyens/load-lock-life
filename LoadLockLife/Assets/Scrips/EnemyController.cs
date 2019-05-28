@@ -10,8 +10,13 @@ public class EnemyController : MonoBehaviour
     Transform player;
     NavMeshAgent agent;
 
+    [Range(0, 3)] public int enemyType;
+
+    public float enemyHealth;
+
     // Start is called before the first frame update
     void Start() {
+        enemyHealth = enemyType;
         GameObject[] temp = Resources.FindObjectsOfTypeAll<GameObject>();
         foreach (GameObject g in temp)
         {
