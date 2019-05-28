@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour {
     public PlayerController ps;
 
     GameObject deathEffect;
+    GameObject bigdeathEffect;
     public float moveSpeed = 12f;
 
     GameObject healParent;
@@ -35,6 +36,8 @@ public class Bullet : MonoBehaviour {
                 deathEffect = g;
             if (g.name == "Heal")
                 heal = g;
+            if (g.name == "BigDeathEffect")
+                bigdeathEffect = g;
             player = GameObject.Find("Player");
             MoveBullet();
             healParent = gameManager.transform.GetChild(0).gameObject;
@@ -44,18 +47,23 @@ public class Bullet : MonoBehaviour {
 
 
     private void OnTriggerEnter(Collider other) {
-        if (other.name.Contains("Enemy"))
+        if (other.name.Contains( "DefaultEnemy"))
         {
-            player.GetComponent<PlayerController>().KillEnemy();
-            player.GetComponent<PlayerController>().enemiesKilled++;
-            PowerupDrop();
-            
-            GameObject healtemp = Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
-            gameManager.healObjects.Add(healtemp);
-            if(deathEffect != null)
-              Destroy(Instantiate(deathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
-            Destroy(other.gameObject);
-            Destroy(gameObject);
+            KillEnemy(other);
+        }
+        if (other.name.Contains("BigEnemy"))
+        {
+            other.GetComponent<BigEnemyController>().enemyHealth -= 1;
+            if(other.GetComponent<BigEnemyController>().enemyHealth <= 0)
+            {
+                KillEnemy(other);
+            } else
+            {
+                other.transform.localScale /= 2;
+                player.GetComponent<PlayerController>().KillEnemy();
+                if(deathEffect != null)
+                    Destroy(Instantiate(bigdeathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f)
+            }
         }
       
     }
@@ -82,5 +90,18 @@ public class Bullet : MonoBehaviour {
         rand = Random.Range(0, gameManager.blastPowerupDropRate);
         if (rand == 1)
             Instantiate(blastPrefab, transform.position, transform.rotation);
+    }
+
+    void KillEnemy(Collider other) {
+        player.GetComponent<PlayerController>().KillEnemy();
+        player.GetComponent<PlayerController>().enemiesKilled++;
+        PowerupDrop();
+
+        GameObject healtemp = Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
+        gameManager.healObjects.Add(healtemp);
+        if (deathEffect != null)
+            Destroy(Instantiate(deathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
+        Destroy(other.gameObject);
+        Destroy(gameObject);
     }
 }
