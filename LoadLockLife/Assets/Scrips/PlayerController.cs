@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject healsParent;
 
     public GameObject playerhurteffect;
+    public GameObject infshothurteffect;
 
 
     private void Start() {
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour {
         highscore = PlayerPrefs.GetInt("highscore");
         Time.timeScale = 1f;
         playerhurteffect = GameObject.Find("PlayerHurtEffect");
+        infshothurteffect = GameObject.Find("InfShotHurtEffect");
     }
 
     void Update() {
@@ -163,9 +165,15 @@ public class PlayerController : MonoBehaviour {
             audioSource.PlayOneShot(hurtsound);
             gameObject.transform.localScale /= healscaleModifier;
             speed *= healspeedMultiplier;
-            playerhurteffect.transform.position = transform.position;
-            playerhurteffect.GetComponent<ParticleSystem>().Play();
-
+            if (infiniteShooting)
+            {
+                infshothurteffect.transform.position = transform.position;
+                infshothurteffect.GetComponent<ParticleSystem>().Play();
+            } else
+            {
+                playerhurteffect.transform.position = transform.position;
+                playerhurteffect.GetComponent<ParticleSystem>().Play();
+            }
        
 
         } else if (transform.localScale.x < minSize && canBeHurt)
