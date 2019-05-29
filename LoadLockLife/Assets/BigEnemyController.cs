@@ -7,7 +7,7 @@ public class BigEnemyController : MonoBehaviour {
     GameManager gameManager;
     public GameObject deathEffect;
     Transform player;
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     public float enemyHealth;
 
