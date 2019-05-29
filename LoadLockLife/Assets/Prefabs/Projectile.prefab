@@ -94,6 +94,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   ps: {fileID: 0}
+  bigdeathEffect: {fileID: 1190157866919430954, guid: 47952eafa08e6164b85048cf3661b9b3,
+    type: 3}
   moveSpeed: 10
 --- !u!54 &818464600302040164
 Rigidbody:

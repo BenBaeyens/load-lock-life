@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour {
     public PlayerController ps;
 
     GameObject deathEffect;
-    GameObject bigdeathEffect;
+    public GameObject bigdeathEffect;
     public float moveSpeed = 12f;
 
     GameObject healParent;

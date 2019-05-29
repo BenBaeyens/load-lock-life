@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     GameManager gameManager;
     Animator animator;
     public GameObject enemy;
+    public GameObject bigenemy;
     public GameObject enemyParent;
     public float time;
     public bool isSpawnable = true;
@@ -45,7 +46,17 @@ public class EnemySpawner : MonoBehaviour
             {
                 animator.Play("enemyspawner");
                 yield return new WaitForSeconds(2);
+            float random = Random.value;
+            if (random > gameManager.DefaultEnemySpawnChance && !isSpawnable)
+            {
+                Instantiate(bigenemy, transform.position, transform.rotation, enemyParent.transform);
+                isSpawnable = true;
+            }
+            if(random <= gameManager.DefaultEnemySpawnChance && !isSpawnable)
+            {
                 Instantiate(enemy, transform.position, transform.rotation, enemyParent.transform);
+                
+            }
             }
             isSpawnable = true;
 

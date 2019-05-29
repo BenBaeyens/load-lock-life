@@ -237,4 +237,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 0}
-  enemyHealth: 2
+  agent: {fileID: 0}
+  enemyHealth: 3
