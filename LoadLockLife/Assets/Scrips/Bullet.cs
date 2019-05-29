@@ -14,12 +14,12 @@ public class Bullet : MonoBehaviour {
     public GameObject bigdeathEffect;
     public float moveSpeed = 12f;
 
-    GameObject healParent;
-    GameObject godModePrefab;
-    GameObject infShotPrefab;
-    GameObject blastPrefab;
+    public GameObject healParent;
+    public GameObject godModePrefab;
+    public GameObject infShotPrefab;
+    public GameObject blastPrefab;
 
-    GameObject heal;
+    public GameObject heal;
 
     private void Start() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();

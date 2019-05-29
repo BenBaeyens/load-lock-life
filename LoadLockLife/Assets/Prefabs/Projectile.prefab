@@ -97,6 +97,14 @@ MonoBehaviour:
   bigdeathEffect: {fileID: 1190157866919430954, guid: 47952eafa08e6164b85048cf3661b9b3,
     type: 3}
   moveSpeed: 10
+  healParent: {fileID: 0}
+  godModePrefab: {fileID: 1288177437178890827, guid: 34f4aa2f6ce578546925863e0629adeb,
+    type: 3}
+  infShotPrefab: {fileID: 2803403296841497726, guid: c970b00ac018dcd4aad302d51c4dff06,
+    type: 3}
+  blastPrefab: {fileID: 4832733834249646592, guid: 06468fe446c283e49a1e38730f295284,
+    type: 3}
+  heal: {fileID: 1248552178463636255, guid: 7150b8ef0ec703746b3ee4d21bc4ea75, type: 3}
 --- !u!54 &818464600302040164
 Rigidbody:
   m_ObjectHideFlags: 0
