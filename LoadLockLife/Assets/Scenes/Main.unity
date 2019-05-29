@@ -1224,6 +1224,8 @@ MonoBehaviour:
   blastPowerupDropRate: 40
   godModePowerupDropRate: 60
   infShotPowerupDropRate: 100
+  DefaultEnemySpawnChance: 0.7
+  BigEnemySpawnChance: 0.3
   finalScoreText: 'YOUR SCORE: '
   finalHighScoreText: 'HIGHSCORE: '
   gameOverObject: {fileID: 1470381469}
@@ -3586,11 +3588,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1570604402483825442, guid: bf707bdccf698654dafa26f4e71790fe,
-        type: 3}
-      propertyPath: enemyHealth
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3613501368303837379, guid: bf707bdccf698654dafa26f4e71790fe,
         type: 3}
       propertyPath: m_Name
