@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour {
                 infShotPrefab = g;
             if (g.name == "Blast")
                 blastPrefab = g;
-            if (g.name == "DeathEffect")
+            if (g.name == "DefaultDeathEffect")
                 deathEffect = g;
             if (g.name == "Heal")
                 heal = g;

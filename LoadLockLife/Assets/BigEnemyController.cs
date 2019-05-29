@@ -16,8 +16,9 @@ public class BigEnemyController : MonoBehaviour {
         GameObject[] temp = Resources.FindObjectsOfTypeAll<GameObject>();
         foreach (GameObject g in temp)
         {
-            if (g.name == "DeathEffect")
+            if (g.name == "DefaultDeathEffect")
                 deathEffect = g;
+            
         }
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
