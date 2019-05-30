@@ -49,14 +49,14 @@ public class Bullet : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.name.Contains( "DefaultEnemy"))
         {
-            KillEnemy(other);
+            KillEnemy(other, "Default");
         }
         if (other.name.Contains("BigEnemy"))
         {
             other.GetComponent<BigEnemyController>().enemyHealth -= 1;
             if(other.GetComponent<BigEnemyController>().enemyHealth <= 0)
             {
-                KillEnemy(other);
+                KillEnemy(other, "Big");
             } else
             {
                 other.transform.localScale /= 1.3f;
@@ -93,15 +93,17 @@ public class Bullet : MonoBehaviour {
             Instantiate(blastPrefab, transform.position, transform.rotation);
     }
 
-    void KillEnemy(Collider other) {
+    void KillEnemy(Collider other, string enemyType) {
         player.GetComponent<PlayerController>().KillEnemy();
         player.GetComponent<PlayerController>().enemiesKilled++;
         PowerupDrop();
 
         GameObject healtemp = Instantiate(heal, other.gameObject.transform.position, other.gameObject.transform.rotation, healParent.transform);
         gameManager.healObjects.Add(healtemp);
-        if (deathEffect != null)
+        if (deathEffect != null && enemyType == "Default")
             Destroy(Instantiate(deathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
+        if(bigdeathEffect != null && enemyType == "Big")
+            Destroy(Instantiate(bigdeathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
         Destroy(other.gameObject);
         Destroy(gameObject);
     }
