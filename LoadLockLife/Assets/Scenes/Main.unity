@@ -1224,7 +1224,7 @@ MonoBehaviour:
   blastPowerupDropRate: 40
   godModePowerupDropRate: 60
   infShotPowerupDropRate: 100
-  DefaultEnemySpawnChance: 0.7
+  DefaultEnemySpawnChance: 0.802
   BigEnemySpawnChance: 0.3
   finalScoreText: 'YOUR SCORE: '
   finalHighScoreText: 'HIGHSCORE: '
