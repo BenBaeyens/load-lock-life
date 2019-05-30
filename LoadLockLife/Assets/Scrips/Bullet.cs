@@ -59,6 +59,8 @@ public class Bullet : MonoBehaviour {
                 KillEnemy(other, "Big");
             } else
             {
+                other.transform.position += transform.forward * 0.3f;
+                
                 other.transform.localScale /= 1.3f;
                 other.GetComponent<BigEnemyController>().agent.speed *= 1.6f;
                 player.GetComponent<PlayerController>().KillEnemy();
