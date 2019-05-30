@@ -19,6 +19,8 @@ public class Bullet : MonoBehaviour {
     public GameObject infShotPrefab;
     public GameObject blastPrefab;
 
+   
+
     public GameObject heal;
 
     private void Start() {
@@ -59,7 +61,7 @@ public class Bullet : MonoBehaviour {
                 KillEnemy(other, "Big");
             } else
             {
-                other.transform.position += transform.forward * 0.3f;
+                other.transform.position += transform.forward * gameManager.defaultKnockback;
                 Destroy(gameObject);
                 other.transform.localScale /= 1.3f;
                 other.GetComponent<BigEnemyController>().agent.speed *= 1.6f;

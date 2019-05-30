@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
     public int infShotPowerupDropRate = 100;
 
     [Range(0, 1f)] public float DefaultEnemySpawnChance = 0.7f;
-    [Range(0, 1f)] public float BigEnemySpawnChance = 0.3f;
+    [Range(0.01f, 3f)] public float defaultKnockback;
 
 
     [Header("UI elements")]
@@ -68,9 +68,6 @@ public class GameManager : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-
-        BigEnemySpawnChance = 1 - DefaultEnemySpawnChance;
-        DefaultEnemySpawnChance = 1 - BigEnemySpawnChance;
 
         KillHealables();
     }
