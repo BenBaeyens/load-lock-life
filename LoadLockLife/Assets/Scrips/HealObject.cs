@@ -19,7 +19,7 @@ public class HealObject : MonoBehaviour {
     private void Update() {
         float distance = Vector3.Distance(player.position, transform.position);
 
-        if (distance <= radius && player.GetComponent<PlayerController>().transform.localScale.x <= player.GetComponent<PlayerController>().maxSize)
+        if (distance <= radius && player.GetComponent<PlayerController>().transform.localScale.x < player.GetComponent<PlayerController>().maxSize)
             agent.destination = player.position;
         else
             agent.destination = transform.position;
