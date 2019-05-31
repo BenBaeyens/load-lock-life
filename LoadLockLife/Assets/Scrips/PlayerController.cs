@@ -57,6 +57,10 @@ public class PlayerController : MonoBehaviour {
     public GameObject playerhurteffect;
     public GameObject infshothurteffect;
 
+    bool PowerupTimeIsHalf = false;
+
+    Material flashmaterial;
+
 
     private void Start() {
         projectile.GetComponent<Renderer>().material = defaultbullet;
@@ -88,7 +92,13 @@ public class PlayerController : MonoBehaviour {
             hasPowerup = true;
         else
             hasPowerup = false;
-        
+
+        if(infiniteShooting && PowerupTimeIsHalf)
+        {
+            float value = Mathf.PingPong(Time.time, 0.4f);
+            gameObject.GetComponent<Renderer>().material.Lerp(infshooting, playermat, value);
+        }
+
     }
 
     void FixedUpdate() {
@@ -203,8 +213,11 @@ public class PlayerController : MonoBehaviour {
 
     public IEnumerator InfiniteShooting() {
         infiniteShooting = true;
+        PowerupTimeIsHalf = false;
         projectile.GetComponent<Renderer>().material = infshooting;
-        yield return new WaitForSeconds(gameManager.infShootingLenght);
+        yield return new WaitForSeconds(gameManager.infShootingLenght / 2);
+        PowerupTimeIsHalf = true;
+        yield return new WaitForSeconds(gameManager.infShootingLenght / 2);
         gameObject.GetComponent<Renderer>().material = playermat;
         infiniteShooting = false;
         projectile.GetComponent<Renderer>().material = defaultbullet;
