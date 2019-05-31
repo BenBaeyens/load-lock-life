@@ -211,6 +211,7 @@ public class PlayerController : MonoBehaviour {
 
     public IEnumerator GodMode() {
         canBeHurt = false;
+        PowerupTimeIsHalf = false;
         gameObject.transform.localScale = new Vector3(maxSize, maxSize, maxSize);
         yield return new WaitForSeconds(gameManager.godModeLenght / 2);
         PowerupTimeIsHalf = true;
