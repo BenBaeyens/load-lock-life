@@ -99,6 +99,12 @@ public class PlayerController : MonoBehaviour {
             gameObject.GetComponent<Renderer>().material.Lerp(infshooting, playermat, value);
         }
 
+        if (!canBeHurt && PowerupTimeIsHalf)
+        {
+            float value = Mathf.PingPong(Time.time, 0.4f);
+            gameObject.GetComponent<Renderer>().material.Lerp(godmode, playermat, value);
+        }
+
     }
 
     void FixedUpdate() {
@@ -206,7 +212,9 @@ public class PlayerController : MonoBehaviour {
     public IEnumerator GodMode() {
         canBeHurt = false;
         gameObject.transform.localScale = new Vector3(maxSize, maxSize, maxSize);
-        yield return new WaitForSeconds(gameManager.godModeLenght);
+        yield return new WaitForSeconds(gameManager.godModeLenght / 2);
+        PowerupTimeIsHalf = true;
+        yield return new WaitForSeconds(gameManager.godModeLenght / 2);
         gameObject.GetComponent<Renderer>().material = playermat;
         canBeHurt = true;
     }
