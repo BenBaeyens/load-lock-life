@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class BigEnemyController : MonoBehaviour {
     GameManager gameManager;
-    public GameObject deathEffect;
+    public GameObject bigdeathEffect;
     Transform player;
     public NavMeshAgent agent;
 
@@ -16,8 +16,8 @@ public class BigEnemyController : MonoBehaviour {
         GameObject[] temp = Resources.FindObjectsOfTypeAll<GameObject>();
         foreach (GameObject g in temp)
         {
-            if (g.name == "DefaultDeathEffect")
-                deathEffect = g;
+            if (g.name == "BigDeathEffect")
+                bigdeathEffect = g;
             
         }
 
@@ -54,14 +54,14 @@ public class BigEnemyController : MonoBehaviour {
 
 
             player.GetComponent<PlayerController>().Hurt();
-            if (deathEffect != null)
-                Instantiate(deathEffect, transform);
+            if (bigdeathEffect != null)
+                Instantiate(bigdeathEffect, transform);
             if (!player.GetComponent<PlayerController>().canBeHurt)
             {
                 player.GetComponent<PlayerController>().enemiesKilled++;
                 player.GetComponent<PlayerController>().KillEnemy();
                 player.GetComponent<PlayerController>().audioSource.PlayOneShot(player.GetComponent<PlayerController>().godmodeSound);
-                Destroy(Instantiate(deathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
+                Destroy(Instantiate(bigdeathEffect, other.transform.position, new Quaternion(-transform.rotation.x, transform.rotation.y, -transform.rotation.z, 1)), 2f);
             }
             Destroy(gameObject);
         }
